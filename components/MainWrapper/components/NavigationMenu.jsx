@@ -12,12 +12,12 @@ export const NavigationMenu = () => {
                 </Link>
             </Menu.Item>
             <Menu.Item icon={<RiseOutlined/>}>
-                <Link href={'market/computers'}>
+                <Link href={'/market/computers'}>
                     Компы
                 </Link>
             </Menu.Item>
             <Menu.Item icon={<RiseOutlined/>}>
-                <Link href={'market/smartphones'}>
+                <Link href={'/market/smartphones'}>
                     Смартфоны
                 </Link>
             </Menu.Item>

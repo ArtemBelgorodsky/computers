@@ -69,6 +69,7 @@ const Computers = ({data}) => {
     return (
         <Space direction={'horizontal'}>
             {computersList.map((item, index) => {
+							if (item._type == 'computer'){
                 return (
                     <Card key={index}
                         style={{
@@ -97,7 +98,7 @@ const Computers = ({data}) => {
                             </>}
                         />
                     </Card>
-                )
+                )}
             })}
 
         </Space>

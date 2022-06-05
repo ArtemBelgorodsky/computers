@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from 'react';
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card, Space} from 'antd';
+import { PlusSquareOutlined, EllipsisOutlined, RetweetOutlined } from '@ant-design/icons';
 const { Meta } = Card;
 
 
@@ -11,9 +11,49 @@ const Smartphones =({data}) => {
 	useEffect(() => {
 		setsmartphonesList(data)
 	}, [])
-	
-	console.log(data);
-	smartphonesList.map((item, index) => {
+
+	const DeleteCard = (item) => {
+
+		const newArr = smartphonesList.filter((elem) => elem._id !== item._id)
+		setsmartphonesList(newArr)
+}
+
+	const CreateCard = (item) => {
+		setsmartphonesList([...smartphonesList, item]);
+	}
+
+	const rendersomeCard = (type, value) => {
+		let result;
+		switch (type) {
+			case 'color': {
+
+				result = value + ' ' + 'color'
+				break
+			}
+			case 'weight': {
+
+				result = value + ' ' + 'weight'
+				break
+			}
+			default: {
+				result = value
+				break;
+			}
+		}
+		return result
+	}
+
+const UpperCase = (itemIndex) => { //ФУНКЦИЯ СЕТ ВОЗВРАЩАЕТ ПРЕДЫДУЩЕЕ ЗНАЧЕНИЕ! 
+	setsmartphonesList (prev => {
+		const copy = [...prev];
+		copy[itemIndex].name = copy[itemIndex].name.toUpperCase()
+	return copy
+	})}
+
+	return (
+		<Space direction={'horizontal'}>
+	{smartphonesList.map((item, index) => {
+		if (item._type == 'smartphone'){
 		return (
 			<Card key ={index}
 			style={{
@@ -22,24 +62,31 @@ const Smartphones =({data}) => {
 			cover={
 				<img
 					alt="example"
-					src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+					src={item.image}
 				/>
 			}
 			actions={[
-				<SettingOutlined key="setting" />,
-				<EditOutlined key="edit" />,
-				<EllipsisOutlined key="ellipsis" />,
+				<RetweetOutlined  onClick={() => DeleteCard(item)} key="RetweetOutlined" />,
+				<PlusSquareOutlined  onClick={() => CreateCard(item)} key="plusSquareOutlined" />,
+				<EllipsisOutlined onClick={() => UpperCase(index)} key="ellipsis" />,
 			]}
 		>
-			<Meta
-				avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+			<Meta key={item}
 				title={item.name}
-				description="This is the description"
+				description={Object.keys(item.short_desc).map((elem, index) => {
+					return (
+						<div key={index}>
+							{rendersomeCard(elem, item.short_desc[elem])}
+						</div>
+					)
+				})}
 			/>
 		</Card>
+	)}
+	})}
+	</Space>
 	);
-	})
-}
+};
 
 export async function getServerSideProps() {
 	const res = await fetch(`http://localhost:3000/api/hello`)
