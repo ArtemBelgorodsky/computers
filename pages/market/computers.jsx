@@ -70,7 +70,7 @@ const Computers = ({data}) => {
         <Space direction={'horizontal'}>
             {computersList.map((item, index) => {
                 return (
-                    <Card
+                    <Card key={index}
                         style={{
                             width: 300,
                         }}
@@ -86,7 +86,7 @@ const Computers = ({data}) => {
                             <EditOutlined onClick={() => editObj(index)} key={'edit'}/>
                         ]}
                     >
-                        <Meta
+                        <Meta key={index}
                             title={item.name}
                             description={<>
                                 {Object.keys(item.short_desc).map((elem, index) => {

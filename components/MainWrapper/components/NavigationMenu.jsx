@@ -17,8 +17,8 @@ export const NavigationMenu = () => {
                 </Link>
             </Menu.Item>
             <Menu.Item icon={<RiseOutlined/>}>
-                <Link href={'example'}>
-                    Компы
+                <Link href={'market/smartphones'}>
+                    Смартфоны
                 </Link>
             </Menu.Item>
         </Menu>
