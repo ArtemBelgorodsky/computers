@@ -23,7 +23,7 @@ function filterlist() {
 		setRendered(true);
 		form.setFieldsValue({
 			...queryToObject()
-		})
+		});
 	}, [router.query])
 	
 
@@ -94,7 +94,6 @@ function filterlist() {
       <Form.Item
         label="Введите начало предложения"
         name="simple"
-				setFieldsValue
         rules={[
           {
             required: false,
