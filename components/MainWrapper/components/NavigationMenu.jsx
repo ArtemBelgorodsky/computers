@@ -21,6 +21,16 @@ export const NavigationMenu = () => {
                     Смартфоны
                 </Link>
             </Menu.Item>
+						<Menu.Item icon={<RiseOutlined/>}>
+                <Link href={'/market/filtertable'}>
+                    Таблица с фильтрами
+                </Link>
+            </Menu.Item>
+						<Menu.Item icon={<RiseOutlined/>}>
+                <Link href={'/market/filterlist'}>
+                    Список с фильтрами
+                </Link>
+            </Menu.Item>
         </Menu>
     );
 };
